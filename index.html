@@ -1,0 +1,2853 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>
+        BƏYLƏROĞLU | Avto Ehtiyat Hissələri Marketpleysi
+    </title>
+
+    <style>
+        :root {
+            --ocean-darkest: #04101e;
+            --ocean-abyss: #07192f;
+            --ocean-navy: #0b2545;
+            --ocean-surface: #133a66;
+            --ocean-blue: #0284c7;
+            --ocean-blue-hover: #0369a1;
+            --cyan-accent: #00d2ff;
+            --cyan-glow: rgba(0, 210, 255, 0.35);
+
+            --card-bg: #ffffff;
+            --text-dark: #0f172a;
+            --text-muted: #64748b;
+            --text-light: #f8fafc;
+            --text-cyan: #7dd3fc;
+
+            --border-ocean: #1e3e66;
+            --border-card: #e2e8f0;
+
+            --radius-md: 12px;
+            --radius-lg: 16px;
+            --radius-full: 9999px;
+
+            --shadow-card:
+                0 4px 20px -2px rgba(0, 0, 0, 0.25);
+
+            --shadow-card-hover:
+                0 16px 32px -4px rgba(2, 132, 199, 0.25);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family:
+                -apple-system,
+                BlinkMacSystemFont,
+                "Segoe UI",
+                Roboto,
+                Arial,
+                sans-serif;
+        }
+
+        body {
+            background-color: var(--ocean-abyss);
+            color: var(--text-light);
+            line-height: 1.5;
+            min-height: 100vh;
+
+            background-image:
+                radial-gradient(
+                    circle at 15% 10%,
+                    rgba(2, 132, 199, 0.25) 0%,
+                    transparent 40%
+                ),
+                radial-gradient(
+                    circle at 85% 60%,
+                    rgba(0, 210, 255, 0.15) 0%,
+                    transparent 45%
+                ),
+                linear-gradient(
+                    180deg,
+                    var(--ocean-darkest) 0%,
+                    var(--ocean-abyss) 100%
+                );
+
+            background-attachment: fixed;
+        }
+
+        header {
+            background: rgba(7, 25, 47, 0.95);
+            backdrop-filter: blur(12px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+
+            border-bottom:
+                1px solid var(--border-ocean);
+
+            box-shadow:
+                0 4px 20px rgba(0, 0, 0, 0.4);
+        }
+
+        .header-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 12px 20px;
+
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+
+            text-decoration: none;
+            color: white;
+            cursor: pointer;
+        }
+
+        .logo-badge {
+            width: 56px;
+            height: 56px;
+
+            border-radius: 50%;
+
+            background:
+                radial-gradient(
+                    circle,
+                    #ffffff 65%,
+                    #e0f2fe 100%
+                );
+
+            border:
+                3px solid var(--cyan-accent);
+
+            box-shadow:
+                0 0 15px var(--cyan-glow);
+
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+
+            text-align: center;
+        }
+
+        .logo-badge h1 {
+            font-size: 8px;
+            font-weight: 900;
+
+            color: var(--ocean-navy);
+            line-height: 1;
+        }
+
+        .logo-badge .badge-icon {
+            font-size: 13px;
+            line-height: 1;
+            margin: 2px 0;
+        }
+
+        .logo-badge span {
+            font-size: 5.5px;
+            font-weight: 800;
+
+            color: #0369a1;
+            text-transform: uppercase;
+        }
+
+        .logo-title-group h2 {
+            font-size: 18px;
+            font-weight: 800;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #ffffff 40%,
+                    var(--cyan-accent) 100%
+                );
+
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+
+            line-height: 1.2;
+        }
+
+        .logo-title-group p {
+            font-size: 11px;
+            color: var(--text-cyan);
+            font-weight: 600;
+        }
+
+        .search-bar {
+            flex: 1;
+            min-width: 280px;
+            max-width: 560px;
+        }
+
+        .search-bar .input-wrapper {
+            display: flex;
+            align-items: center;
+
+            background:
+                rgba(19, 58, 102, 0.7);
+
+            border:
+                1.5px solid var(--border-ocean);
+
+            border-radius: var(--radius-full);
+
+            padding: 4px 6px 4px 16px;
+
+            box-shadow:
+                inset 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .search-bar .input-wrapper:focus-within {
+            border-color: var(--cyan-accent);
+
+            background:
+                rgba(19, 58, 102, 0.95);
+
+            box-shadow:
+                0 0 15px var(--cyan-glow);
+        }
+
+        .search-bar input {
+            width: 100%;
+
+            background: transparent;
+            border: none;
+
+            color: white;
+            font-size: 13.5px;
+
+            outline: none;
+        }
+
+        .search-bar input::placeholder {
+            color: #94a3b8;
+        }
+
+        .search-bar button {
+            background:
+                linear-gradient(
+                    135deg,
+                    #00b4d8 0%,
+                    #0077b6 100%
+                );
+
+            border: none;
+            color: white;
+
+            padding: 8px 18px;
+
+            border-radius: var(--radius-full);
+
+            font-weight: 700;
+            font-size: 13px;
+
+            cursor: pointer;
+            white-space: nowrap;
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .btn-header {
+            background:
+                rgba(19, 58, 102, 0.6);
+
+            color: #e0f2fe;
+
+            border:
+                1px solid var(--border-ocean);
+
+            padding: 8px 14px;
+
+            border-radius: var(--radius-md);
+
+            font-size: 12.5px;
+            font-weight: 600;
+
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn-header:hover {
+            border-color: var(--cyan-accent);
+
+            background:
+                rgba(2, 132, 199, 0.3);
+
+            color: white;
+        }
+
+        /* HERO */
+
+        .hero {
+            padding: 35px 20px 45px;
+            text-align: center;
+
+            border-bottom:
+                1px solid rgba(2, 132, 199, 0.2);
+        }
+
+        .hero-badge {
+            display: inline-block;
+
+            background:
+                rgba(2, 132, 199, 0.18);
+
+            border:
+                1px solid var(--cyan-accent);
+
+            color: var(--cyan-accent);
+
+            padding: 5px 16px;
+
+            border-radius: var(--radius-full);
+
+            font-size: 12.5px;
+            font-weight: 700;
+
+            margin-bottom: 12px;
+        }
+
+        .hero h2 {
+            font-size: 30px;
+            font-weight: 800;
+
+            margin-bottom: 8px;
+
+            background:
+                linear-gradient(
+                    180deg,
+                    #ffffff 40%,
+                    #bae6fd 100%
+                );
+
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            color: #94a3b8;
+            font-size: 14.5px;
+
+            max-width: 650px;
+            margin: 0 auto 20px;
+        }
+
+        /* FILTER & OEM SEARCH */
+
+        .code-search-box {
+            background:
+                rgba(11, 37, 69, 0.85);
+
+            border:
+                1px solid rgba(0, 210, 255, 0.4);
+
+            border-radius: var(--radius-lg);
+
+            padding: 18px;
+
+            max-width: 860px;
+            margin: 0 auto;
+
+            box-shadow:
+                0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .quick-codes {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            gap: 8px;
+            flex-wrap: wrap;
+
+            margin-bottom: 14px;
+
+            font-size: 12.5px;
+            color: var(--text-cyan);
+        }
+
+        .code-tag {
+            background:
+                rgba(0, 210, 255, 0.15);
+
+            color: #ffffff;
+
+            font-family:
+                "SFMono-Regular",
+                Consolas,
+                "Liberation Mono",
+                Menlo,
+                monospace;
+
+            padding: 3px 9px;
+
+            border-radius: 6px;
+
+            border:
+                1px solid rgba(0, 210, 255, 0.35);
+
+            cursor: pointer;
+
+            font-weight: 700;
+            font-size: 12px;
+
+            transition: all 0.2s;
+        }
+
+        .code-tag:hover {
+            background: var(--cyan-accent);
+            color: var(--ocean-darkest);
+        }
+
+        .filter-grid {
+            display: grid;
+
+            grid-template-columns:
+                1.3fr 1fr 1fr 100px;
+
+            gap: 10px;
+        }
+
+        .filter-input,
+        .filter-select {
+            width: 100%;
+
+            padding: 10px 14px;
+
+            background:
+                rgba(7, 25, 47, 0.95);
+
+            border:
+                1.5px solid var(--border-ocean);
+
+            border-radius: 8px;
+
+            color: white;
+            font-size: 13.5px;
+
+            outline: none;
+        }
+
+        .filter-input:focus,
+        .filter-select:focus {
+            border-color: var(--cyan-accent);
+        }
+
+        .filter-select option {
+            background: var(--ocean-navy);
+            color: white;
+        }
+
+        .btn-reset {
+            padding: 10px;
+
+            background:
+                rgba(2, 132, 199, 0.25);
+
+            color: #bae6fd;
+
+            border:
+                1px solid rgba(2, 132, 199, 0.5);
+
+            border-radius: 8px;
+
+            font-weight: 700;
+            font-size: 13px;
+
+            cursor: pointer;
+        }
+
+        .btn-reset:hover {
+            background:
+                rgba(2, 132, 199, 0.45);
+
+            color: white;
+        }
+
+        .container {
+            max-width: 1280px;
+
+            margin:
+                30px auto 60px;
+
+            padding:
+                0 20px;
+        }
+
+        .section-title {
+            display: flex;
+
+            justify-content:
+                space-between;
+
+            align-items:
+                flex-end;
+
+            margin-bottom: 20px;
+
+            border-bottom:
+                1px solid rgba(2, 132, 199, 0.2);
+
+            padding-bottom: 10px;
+        }
+
+        .section-title h3 {
+            font-size: 21px;
+            font-weight: 800;
+            color: white;
+        }
+
+        .section-title p {
+            color: #94a3b8;
+            font-size: 13.5px;
+        }
+
+        .product-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(
+                    auto-fill,
+                    minmax(280px, 1fr)
+                );
+
+            gap: 22px;
+        }
+
+        .product-card {
+            background: var(--card-bg);
+
+            border:
+                1px solid var(--border-card);
+
+            border-radius:
+                var(--radius-lg);
+
+            overflow: hidden;
+
+            display: flex;
+            flex-direction: column;
+
+            color: var(--text-dark);
+
+            box-shadow:
+                var(--shadow-card);
+
+            transition:
+                transform 0.25s,
+                box-shadow 0.25s;
+        }
+
+        .product-card:hover {
+            transform:
+                translateY(-5px);
+
+            box-shadow:
+                var(--shadow-card-hover);
+
+            border-color:
+                #7dd3fc;
+        }
+
+        .product-img-wrapper {
+            height: 180px;
+
+            background: #07192f;
+
+            position: relative;
+            overflow: hidden;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-bottom:
+                2px solid #e2e8f0;
+        }
+
+        .product-img-wrapper img {
+            width: 100%;
+            height: 100%;
+
+            object-fit: cover;
+
+            transition:
+                transform 0.35s ease;
+        }
+
+        .product-card:hover
+        .product-img-wrapper img {
+            transform:
+                scale(1.06);
+        }
+
+        .product-tag {
+            position: absolute;
+
+            top: 10px;
+            left: 10px;
+
+            padding: 4px 10px;
+
+            border-radius: 20px;
+
+            font-size: 10.5px;
+            font-weight: 800;
+
+            text-transform: uppercase;
+
+            box-shadow:
+                0 2px 6px rgba(0, 0, 0, 0.3);
+
+            z-index: 2;
+        }
+
+        .tag-used {
+            background: #0f172a;
+            color: #38bdf8;
+            border:
+                1px solid #0284c7;
+        }
+
+        .tag-new {
+            background: #0284c7;
+            color: #ffffff;
+        }
+
+        .part-code-badge {
+            position: absolute;
+
+            top: 10px;
+            right: 10px;
+
+            background:
+                rgba(4, 16, 30, 0.9);
+
+            color: var(--cyan-accent);
+
+            font-family: monospace;
+            font-size: 11px;
+            font-weight: 700;
+
+            padding: 3px 7px;
+
+            border-radius: 5px;
+
+            border:
+                1px solid rgba(0, 210, 255, 0.4);
+
+            z-index: 2;
+        }
+
+        .product-body {
+            padding: 16px;
+
+            flex: 1;
+
+            display: flex;
+            flex-direction: column;
+
+            background: #ffffff;
+        }
+
+        .code-row {
+            display: flex;
+
+            justify-content:
+                space-between;
+
+            align-items:
+                center;
+
+            margin-bottom: 8px;
+
+            flex-wrap: wrap;
+            gap: 4px;
+        }
+
+        .product-id-pill {
+            font-family: monospace;
+            font-size: 11.5px;
+            font-weight: 700;
+
+            color: #0369a1;
+
+            background:
+                #e0f2fe;
+
+            padding:
+                3px 7px;
+
+            border-radius: 4px;
+        }
+
+        .product-oem-tag {
+            font-size: 12px;
+
+            font-family:
+                "SFMono-Regular",
+                Consolas,
+                monospace;
+
+            color: #1e293b;
+            font-weight: 700;
+
+            background:
+                #f1f5f9;
+
+            padding:
+                2px 6px;
+
+            border-radius: 4px;
+
+            border:
+                1px solid #cbd5e1;
+        }
+
+        .product-title {
+            font-size: 15px;
+            font-weight: 700;
+
+            color: var(--text-dark);
+
+            margin-bottom: 8px;
+
+            line-height: 1.35;
+
+            min-height: 40px;
+
+            cursor: pointer;
+        }
+
+        .product-meta {
+            font-size: 12px;
+
+            color: #64748b;
+
+            margin-bottom: 14px;
+        }
+
+        .product-footer {
+            margin-top: auto;
+
+            display: flex;
+
+            align-items: center;
+            justify-content:
+                space-between;
+
+            padding-top: 12px;
+
+            border-top:
+                1px dashed #cbd5e1;
+        }
+
+        .product-price {
+            font-size: 21px;
+            font-weight: 800;
+            color: #0f172a;
+        }
+
+        .product-price span {
+            font-size: 13px;
+            color: #0284c7;
+        }
+
+        .btn-actions {
+            display: flex;
+            gap: 6px;
+        }
+
+        .btn-copy {
+            background: #f1f5f9;
+
+            border:
+                1px solid #cbd5e1;
+
+            padding:
+                7px 10px;
+
+            border-radius: 7px;
+
+            cursor: pointer;
+
+            font-size: 12px;
+        }
+
+        .btn-copy:hover {
+            background: #e2e8f0;
+            color: #0284c7;
+        }
+
+        .btn-buy {
+            background: #10b981;
+
+            color: white;
+
+            border: none;
+
+            padding:
+                7px 14px;
+
+            border-radius: 7px;
+
+            font-size: 12.5px;
+            font-weight: 700;
+
+            cursor: pointer;
+
+            text-decoration: none;
+
+            display: inline-flex;
+
+            align-items: center;
+
+            gap: 5px;
+
+            transition:
+                background 0.2s;
+        }
+
+        .btn-buy:hover {
+            background: #059669;
+        }
+
+        /* MODAL */
+
+        .modal-overlay {
+            position: fixed;
+
+            inset: 0;
+
+            background:
+                rgba(4, 16, 30, 0.85);
+
+            backdrop-filter: blur(6px);
+
+            display: none;
+
+            justify-content:
+                center;
+
+            align-items:
+                center;
+
+            z-index: 1000;
+
+            padding: 16px;
+        }
+
+        .modal-box {
+            background: #ffffff;
+
+            width: 100%;
+            max-width: 520px;
+
+            border-radius:
+                var(--radius-lg);
+
+            padding: 22px;
+
+            box-shadow:
+                0 20px 50px rgba(0, 0, 0, 0.5);
+
+            color: var(--text-dark);
+
+            border:
+                2px solid #bae6fd;
+        }
+
+        .modal-header {
+            display: flex;
+
+            justify-content:
+                space-between;
+
+            align-items:
+                center;
+
+            margin-bottom: 14px;
+
+            padding-bottom: 10px;
+
+            border-bottom:
+                1px solid #e2e8f0;
+        }
+
+        .modal-header h4 {
+            font-size: 18px;
+            font-weight: 800;
+
+            color: var(--ocean-navy);
+        }
+
+        .close-btn {
+            background: #f1f5f9;
+
+            border: none;
+
+            width: 32px;
+            height: 32px;
+
+            border-radius: 50%;
+
+            cursor: pointer;
+
+            font-size: 16px;
+        }
+
+        .toast-notify {
+            position: fixed;
+
+            bottom: 24px;
+            right: 24px;
+
+            background:
+                #0b2545;
+
+            color: white;
+
+            padding:
+                12px 20px;
+
+            border-radius: 10px;
+
+            border:
+                1px solid var(--cyan-accent);
+
+            font-size: 13.5px;
+            font-weight: 600;
+
+            display: none;
+
+            z-index: 2000;
+        }
+
+        footer {
+            background: #04101e;
+
+            color: white;
+
+            padding:
+                30px 20px;
+
+            text-align: center;
+
+            border-top:
+                1px solid var(--border-ocean);
+        }
+
+        @media (max-width: 768px) {
+            .filter-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .header-top {
+                flex-direction: column;
+            }
+
+            .search-bar {
+                width: 100%;
+                max-width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- =====================================================
+         HEADER
+    ====================================================== -->
+
+    <header>
+        <div class="header-top">
+
+            <div
+                class="logo-container"
+                onclick="resetFilters()"
+            >
+                <div class="logo-badge">
+                    <h1>BEYLEROGLU</h1>
+
+                    <div class="badge-icon">
+                        ⚓🚗
+                    </div>
+
+                    <span>
+                        AVTO EHTİYAT
+                    </span>
+                </div>
+
+                <div class="logo-title-group">
+                    <h2>
+                        BƏYLƏROĞLU
+                    </h2>
+
+                    <p>
+                        Avto Ehtiyat Hissələri &
+                        Ölüxana
+                    </p>
+                </div>
+            </div>
+
+
+            <!-- SEARCH -->
+
+            <div class="search-bar">
+                <div class="input-wrapper">
+
+                    <input
+                        type="text"
+                        id="searchInput"
+                        placeholder="OEM Kod (məs: 45510-06060), Xüsusi Kod və ya Detal adı..."
+                        onkeyup="handleSearchKey(event)"
+                    >
+
+                    <button
+                        onclick="filterProducts()"
+                    >
+                        Axtar
+                    </button>
+
+                </div>
+            </div>
+
+
+            <!-- ACTIONS -->
+
+            <div class="header-actions">
+
+                <button
+                    class="btn-header"
+                    onclick="openDirectCodePrompt()"
+                >
+                    🔍 Kodla Axtar
+                </button>
+
+                <button
+                    class="btn-header"
+                    onclick="openAddModal()"
+                >
+                    + Detal Əlavə Et
+                </button>
+
+            </div>
+
+        </div>
+    </header>
+
+
+    <!-- =====================================================
+         HERO / FILTER
+    ====================================================== -->
+
+    <section class="hero">
+
+        <div class="hero-badge">
+            🌊 Dəniz & Göy Mövzu •
+            Xüsusi & Orijinal OEM Kod Sistemi
+        </div>
+
+        <h2>
+            Axtardığınız Detalın OEM Kodunu Yazın,
+            Dərhal Tapın
+        </h2>
+
+        <p>
+            Hər bir detala məxsus xüsusi
+            <strong>OEM Kodu</strong>
+            (məs:
+            <code>45510-06060</code>)
+            ilə istənilən ehtiyat hissəsinin
+            real şəklini və qiymətini görün.
+        </p>
+
+
+        <div class="code-search-box">
+
+            <div class="quick-codes">
+
+                <span>
+                    Nümunə Orijinal OEM Kodlar:
+                </span>
+
+                <span
+                    class="code-tag"
+                    onclick="quickFill('45510-06060')"
+                >
+                    45510-06060 (Toyota)
+                </span>
+
+                <span
+                    class="code-tag"
+                    onclick="quickFill('51117292947')"
+                >
+                    51117292947 (BMW)
+                </span>
+
+                <span
+                    class="code-tag"
+                    onclick="quickFill('A2048203159')"
+                >
+                    A2048203159 (Mercedes)
+                </span>
+
+                <span
+                    class="code-tag"
+                    onclick="quickFill('G9510-47031')"
+                >
+                    G9510-47031 (Prius)
+                </span>
+
+                <span
+                    class="code-tag"
+                    onclick="quickFill('86350-F2000')"
+                >
+                    86350-F2000 (Hyundai)
+                </span>
+
+            </div>
+
+
+            <div class="filter-grid">
+
+                <input
+                    type="text"
+                    id="codeFilter"
+                    class="filter-input"
+                    placeholder="OEM Kod və ya Xüsusi Kod..."
+                    oninput="filterProducts()"
+                >
+
+
+                <select
+                    id="brandSelect"
+                    class="filter-select"
+                    onchange="filterProducts()"
+                >
+                    <option value="all">
+                        Bütün Markalar
+                    </option>
+
+                    <option value="Toyota">
+                        Toyota / Lexus
+                    </option>
+
+                    <option value="BMW">
+                        BMW
+                    </option>
+
+                    <option value="Mercedes-Benz">
+                        Mercedes-Benz
+                    </option>
+
+                    <option value="Hyundai">
+                        Hyundai / Kia
+                    </option>
+
+                    <option value="Chevrolet">
+                        Chevrolet
+                    </option>
+                </select>
+
+
+                <select
+                    id="conditionSelect"
+                    class="filter-select"
+                    onchange="filterProducts()"
+                >
+                    <option value="all">
+                        Bütün Vəziyyətlər
+                    </option>
+
+                    <option value="İşlənmiş (Ölüxana)">
+                        İşlənmiş (Ölüxana)
+                    </option>
+
+                    <option value="Yeni Təzə">
+                        Yeni Təzə
+                    </option>
+                </select>
+
+
+                <button
+                    class="btn-reset"
+                    onclick="resetFilters()"
+                >
+                    Sıfırla
+                </button>
+
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- =====================================================
+         MAIN CONTENT
+    ====================================================== -->
+
+    <div class="container">
+
+        <div class="section-title">
+
+            <div>
+
+                <h3>
+                    Ehtiyat Hissələri Kataloqu
+                </h3>
+
+                <p id="catalogCount">
+                    Aktiv ehtiyat hissələri
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div
+            class="product-grid"
+            id="productGrid"
+        >
+            <!-- JavaScript ilə doldurulur -->
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         PRODUCT DETAIL MODAL
+    ====================================================== -->
+
+    <div
+        class="modal-overlay"
+        id="detailModal"
+    >
+
+        <div class="modal-box">
+
+            <div class="modal-header">
+
+                <h4>
+                    🎯 Detal Məlumatı
+                </h4>
+
+                <button
+                    class="close-btn"
+                    onclick="closeModal('detailModal')"
+                >
+                    &times;
+                </button>
+
+            </div>
+
+
+            <div
+                id="detailContent"
+                style="text-align: center;"
+            >
+                <!-- Dinamik doldurulur -->
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         ADD PRODUCT MODAL
+    ====================================================== -->
+
+    <div
+        class="modal-overlay"
+        id="addModal"
+    >
+
+        <div class="modal-box">
+
+            <div class="modal-header">
+
+                <h4>
+                    Yeni Ehtiyat Hissəsi Əlavə Et
+                </h4>
+
+                <button
+                    class="close-btn"
+                    onclick="closeModal('addModal')"
+                >
+                    &times;
+                </button>
+
+            </div>
+
+
+            <form
+                onsubmit="handleAddProduct(event)"
+            >
+
+                <div
+                    style="
+                        display: grid;
+                        grid-template-columns: 1fr 1fr;
+                        gap: 8px;
+                        margin-bottom: 10px;
+                    "
+                >
+
+                    <div>
+
+                        <label
+                            style="
+                                display: block;
+                                font-size: 12px;
+                                margin-bottom: 4px;
+                                font-weight: bold;
+                            "
+                        >
+                            Xüsusi Kod:
+                        </label>
+
+                        <input
+                            type="text"
+                            id="newCode"
+                            class="filter-input"
+                            placeholder="BYL-009"
+                            required
+                            style="
+                                color: #0f172a;
+                                background: #f8fafc;
+                            "
+                        >
+
+                    </div>
+
+
+                    <div>
+
+                        <label
+                            style="
+                                display: block;
+                                font-size: 12px;
+                                margin-bottom: 4px;
+                                font-weight: bold;
+                            "
+                        >
+                            OEM Kod
+                            (Məs: 45510-06060):
+                        </label>
+
+                        <input
+                            type="text"
+                            id="newOem"
+                            class="filter-input"
+                            placeholder="45510-06060"
+                            required
+                            style="
+                                color: #0f172a;
+                                background: #f8fafc;
+                            "
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <div
+                    style="margin-bottom: 10px;"
+                >
+
+                    <label
+                        style="
+                            display: block;
+                            font-size: 12px;
+                            margin-bottom: 4px;
+                            font-weight: bold;
+                        "
+                    >
+                        Detalın Tam Adı:
+                    </label>
+
+                    <input
+                        type="text"
+                        id="newTitle"
+                        class="filter-input"
+                        placeholder="Məs: Toyota Camry 55 Sükan Reikası"
+                        required
+                        style="
+                            color: #0f172a;
+                            background: #f8fafc;
+                        "
+                    >
+
+                </div>
+
+
+                <div
+                    style="
+                        display: grid;
+                        grid-template-columns: 1fr 1fr;
+                        gap: 8px;
+                        margin-bottom: 10px;
+                    "
+                >
+
+                    <div>
+
+                        <label
+                            style="
+                                display: block;
+                                font-size: 12px;
+                                margin-bottom: 4px;
+                                font-weight: bold;
+                            "
+                        >
+                            Marka:
+                        </label>
+
+                        <input
+                            type="text"
+                            id="newBrand"
+                            class="filter-input"
+                            placeholder="Toyota"
+                            required
+                            style="
+                                color: #0f172a;
+                                background: #f8fafc;
+                            "
+                        >
+
+                    </div>
+
+
+                    <div>
+
+                        <label
+                            style="
+                                display: block;
+                                font-size: 12px;
+                                margin-bottom: 4px;
+                                font-weight: bold;
+                            "
+                        >
+                            Qiymət (AZN):
+                        </label>
+
+                        <input
+                            type="number"
+                            id="newPrice"
+                            class="filter-input"
+                            placeholder="340"
+                            required
+                            style="
+                                color: #0f172a;
+                                background: #f8fafc;
+                            "
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <div
+                    style="margin-bottom: 12px;"
+                >
+
+                    <label
+                        style="
+                            display: block;
+                            font-size: 12px;
+                            margin-bottom: 4px;
+                            font-weight: bold;
+                        "
+                    >
+                        Real Şəkil Linki (URL):
+                    </label>
+
+                    <input
+                        type="text"
+                        id="newImg"
+                        class="filter-input"
+                        placeholder="https://images.unsplash.com/..."
+                        style="
+                            color: #0f172a;
+                            background: #f8fafc;
+                        "
+                    >
+
+                </div>
+
+
+                <button
+                    type="submit"
+                    style="
+                        width: 100%;
+                        padding: 11px;
+                        background: #0284c7;
+                        color: white;
+                        border: none;
+                        border-radius: 6px;
+                        font-weight: bold;
+                        cursor: pointer;
+                        font-size: 14px;
+                    "
+                >
+                    Kataloqa Əlavə Et
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         TOAST
+    ====================================================== -->
+
+    <div
+        class="toast-notify"
+        id="toastNotify"
+    >
+        Bildiriş
+    </div>
+
+
+    <!-- =====================================================
+         FOOTER
+    ====================================================== -->
+
+    <footer>
+
+        <div
+            style="
+                font-weight: bold;
+                font-size: 18px;
+                margin-bottom: 6px;
+            "
+        >
+            BƏYLƏROĞLU AVTO EHTİYAT
+        </div>
+
+        <p>
+            Bütün növ avtomobil ehtiyat hissələri
+            və orijinal OEM kod kataloqu
+            &copy; 2026
+        </p>
+
+    </footer>
+
+
+    <!-- =====================================================
+         FIREBASE + APPLICATION
+    ====================================================== -->
+
+    <script type="module">
+
+        import { initializeApp } from
+            "https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js";
+
+        import {
+            getFirestore,
+            collection,
+            addDoc,
+            getDocs
+        } from
+            "https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js";
+
+
+        // =====================================================
+        // FIREBASE CONFIG
+        // =====================================================
+
+        const firebaseConfig = {
+            apiKey:
+                "AIzaSyCD_ajS9tZUGJPjs4x_fdJG5seQL_wJ-2E",
+
+            authDomain:
+                "beyleroglu-b4582.firebaseapp.com",
+
+            projectId:
+                "beyleroglu-b4582",
+
+            storageBucket:
+                "beyleroglu-b4582.firebasestorage.app",
+
+            messagingSenderId:
+                "533599991009",
+
+            appId:
+                "1:533599991009:web:0ec398b6dc9ed59b8433a0",
+
+            measurementId:
+                "G-94E6XZ4833"
+        };
+
+
+        // =====================================================
+        // FIREBASE INITIALIZATION
+        // =====================================================
+
+        const app =
+            initializeApp(firebaseConfig);
+
+        const db =
+            getFirestore(app);
+
+
+        // =====================================================
+        // DEFAULT PRODUCTS
+        // =====================================================
+
+        let products = [
+
+            {
+                code: "BYL-001",
+                oem: "45510-06060",
+                title:
+                    "Toyota Camry 55 Sükan Reikası (Rulavoy Kalonka)",
+                brand: "Toyota",
+                price: 340,
+                condition:
+                    "İşlənmiş (Ölüxana)",
+                year: "2014-2017",
+                img:
+                    "https://images.unsplash.com/photo-1486006920555-c77dce18193b?auto=format&fit=crop&w=600&q=80"
+            },
+
+            {
+                code: "BYL-002",
+                oem: "51117292947",
+                title:
+                    "BMW F30 M-Tech Ön Bufer Komplekt",
+                brand: "BMW",
+                price: 420,
+                condition:
+                    "İşlənmiş (Ölüxana)",
+                year: "2012-2018",
+                img:
+                    "https://images.unsplash.com/photo-1541348263662-e0c82661210e?auto=format&fit=crop&w=600&q=80"
+            },
+
+            {
+                code: "BYL-003",
+                oem: "A2048203159",
+                title:
+                    "Mercedes-Benz W204 C-Class LED Far Sol (Orijinal)",
+                brand: "Mercedes-Benz",
+                price: 480,
+                condition:
+                    "İşlənmiş (Ölüxana)",
+                year: "2011-2014",
+                img:
+                    "https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&w=600&q=80"
+            },
+
+            {
+                code: "BYL-004",
+                oem: "G9510-47031",
+                title:
+                    "Toyota Prius 30 Hibrid Batareya Bloku (Orijinal Yapon)",
+                brand: "Toyota",
+                price: 850,
+                condition:
+                    "İşlənmiş (Ölüxana)",
+                year: "2009-2015",
+                img:
+                    "https://images.unsplash.com/photo-1558441719-aa344554a1ad?auto=format&fit=crop&w=600&q=80"
+            },
+
+            {
+                code: "BYL-005",
+                oem: "86350-F2000",
+                title:
+                    "Hyundai Elantra Ön Radiator Barmaqlığı (Abtovka Xrom)",
+                brand: "Hyundai",
+                price: 115,
+                condition:
+                    "Yeni Təzə",
+                year: "2016-2020",
+                img:
+                    "https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=600&q=80"
+            },
+
+            {
+                code: "BYL-006",
+                oem: "12148641149",
+                title:
+                    "BMW F10 N20 Mühərrik Beyni (ECU Kompüter)",
+                brand: "BMW",
+                price: 590,
+                condition:
+                    "İşlənmiş (Ölüxana)",
+                year: "2011-2016",
+                img:
+                    "https://images.unsplash.com/photo-1517524008697-84bbe3c3fd98?auto=format&fit=crop&w=600&q=80"
+            },
+
+            {
+                code: "BYL-007",
+                oem: "13427404",
+                title:
+                    "Chevrolet Cruze 1.4 Turbo Radiator Pəri (Diffuzor)",
+                brand: "Chevrolet",
+                price: 140,
+                condition:
+                    "Yeni Təzə",
+                year: "2011-2016",
+                img:
+                    "https://images.unsplash.com/photo-1580273916550-e323be2ae537?auto=format&fit=crop&w=600&q=80"
+            },
+
+            {
+                code: "BYL-008",
+                oem: "A2128200864",
+                title:
+                    "Mercedes-Benz W212 E-Class LED Arxa Stop Fara Sağ",
+                brand: "Mercedes-Benz",
+                price: 270,
+                condition:
+                    "İşlənmiş (Ölüxana)",
+                year: "2009-2013",
+                img:
+                    "https://images.unsplash.com/photo-1617814076367-b759c7d7e738?auto=format&fit=crop&w=600&q=80"
+            }
+
+        ];
+
+
+        // =====================================================
+        // INITIALIZATION
+        // =====================================================
+
+        window.addEventListener(
+            "DOMContentLoaded",
+            async () => {
+
+                await loadProductsFromFirebase();
+
+                filterProducts();
+
+                checkUrlCode();
+            }
+        );
+
+
+        // =====================================================
+        // LOAD FIREBASE PRODUCTS
+        // =====================================================
+
+        async function loadProductsFromFirebase() {
+
+            try {
+
+                const snapshot =
+                    await getDocs(
+                        collection(
+                            db,
+                            "detallar"
+                        )
+                    );
+
+
+                const firebaseProducts =
+                    snapshot.docs.map(
+                        document => ({
+                            id: document.id,
+                            ...document.data()
+                        })
+                    );
+
+
+                if (firebaseProducts.length > 0) {
+
+                    products = [
+                        ...firebaseProducts,
+                        ...products
+                    ];
+
+                }
+
+            } catch (error) {
+
+                console.error(
+                    "Firebase məhsulları yüklənmədi:",
+                    error
+                );
+
+            }
+
+        }
+
+
+        // =====================================================
+        // URL CODE LOOKUP
+        // =====================================================
+
+        function checkUrlCode() {
+
+            const urlParams =
+                new URLSearchParams(
+                    window.location.search
+                );
+
+
+            const code =
+                urlParams.get("oem") ||
+                urlParams.get("kod") ||
+                urlParams.get("code");
+
+
+            if (code) {
+                lookupCode(code);
+            }
+
+        }
+
+
+        // =====================================================
+        // SEARCH
+        // =====================================================
+
+        function handleSearchKey(event) {
+
+            if (event.key === "Enter") {
+
+                const input =
+                    document.getElementById(
+                        "searchInput"
+                    );
+
+
+                const value =
+                    input?.value.trim() || "";
+
+
+                if (value.length > 2) {
+
+                    lookupCode(value);
+
+                } else {
+
+                    filterProducts();
+
+                }
+
+                return;
+            }
+
+
+            filterProducts();
+
+        }
+
+
+        // =====================================================
+        // FILTER PRODUCTS
+        // =====================================================
+
+        function filterProducts() {
+
+            const searchValue =
+                document
+                    .getElementById("searchInput")
+                    ?.value
+                    .toLowerCase()
+                    .trim() || "";
+
+
+            const codeValue =
+                document
+                    .getElementById("codeFilter")
+                    ?.value
+                    .toLowerCase()
+                    .trim() || "";
+
+
+            const brandValue =
+                document
+                    .getElementById("brandSelect")
+                    ?.value || "all";
+
+
+            const conditionValue =
+                document
+                    .getElementById("conditionSelect")
+                    ?.value || "all";
+
+
+            const filteredProducts =
+                products.filter(product => {
+
+                    const matchBrand =
+                        brandValue === "all" ||
+                        product.brand === brandValue;
+
+
+                    const matchCondition =
+                        conditionValue === "all" ||
+                        product.condition ===
+                            conditionValue;
+
+
+                    const matchCode =
+                        !codeValue ||
+                        product.oem
+                            .toLowerCase()
+                            .includes(codeValue) ||
+                        product.code
+                            .toLowerCase()
+                            .includes(codeValue);
+
+
+                    const matchSearch =
+                        !searchValue ||
+                        product.oem
+                            .toLowerCase()
+                            .includes(searchValue) ||
+                        product.code
+                            .toLowerCase()
+                            .includes(searchValue) ||
+                        product.title
+                            .toLowerCase()
+                            .includes(searchValue) ||
+                        product.brand
+                            .toLowerCase()
+                            .includes(searchValue);
+
+
+                    return (
+                        matchBrand &&
+                        matchCondition &&
+                        matchCode &&
+                        matchSearch
+                    );
+
+                });
+
+
+            renderGrid(
+                filteredProducts
+            );
+
+        }
+
+
+        // =====================================================
+        // RENDER GRID
+        // =====================================================
+
+        function renderGrid(list) {
+
+            const grid =
+                document.getElementById(
+                    "productGrid"
+                );
+
+
+            if (!grid) {
+                return;
+            }
+
+
+            const countElement =
+                document.getElementById(
+                    "catalogCount"
+                );
+
+
+            if (countElement) {
+
+                countElement.innerText =
+                    `${list.length} ədəd detal göstərilir`;
+
+            }
+
+
+            if (list.length === 0) {
+
+                grid.innerHTML = `
+                    <div
+                        style="
+                            grid-column: 1/-1;
+                            text-align: center;
+                            padding: 50px 20px;
+                            color: #94a3b8;
+                            background: rgba(11, 37, 69, 0.5);
+                            border-radius: 12px;
+                        "
+                    >
+                        Axtarışa uyğun OEM kod və ya
+                        detal tapılmadı.
+                    </div>
+                `;
+
+                return;
+            }
+
+
+            grid.innerHTML =
+                list
+                    .map(product => `
+
+                        <div class="product-card">
+
+                            <div class="product-img-wrapper">
+
+                                <span
+                                    class="
+                                        product-tag
+                                        ${
+                                            product.condition.includes(
+                                                "İşlənmiş"
+                                            )
+                                                ? "tag-used"
+                                                : "tag-new"
+                                        }
+                                    "
+                                >
+                                    ${product.condition}
+                                </span>
+
+
+                                <span
+                                    class="part-code-badge"
+                                >
+                                    ${product.code}
+                                </span>
+
+
+                                <img
+                                    src="${product.img}"
+                                    alt="${product.title}"
+                                    onerror="
+                                        this.src =
+                                        'https://images.unsplash.com/photo-1486006920555-c77dce18193b?auto=format&fit=crop&w=600&q=80'
+                                    "
+                                >
+
+                            </div>
+
+
+                            <div class="product-body">
+
+                                <div class="code-row">
+
+                                    <span
+                                        class="product-id-pill"
+                                    >
+                                        🔑 ${product.code}
+                                    </span>
+
+
+                                    <span
+                                        class="product-oem-tag"
+                                    >
+                                        OEM: ${product.oem}
+                                    </span>
+
+                                </div>
+
+
+                                <div
+                                    class="product-title"
+                                    onclick="
+                                        openDetail(
+                                            '${product.oem}'
+                                        )
+                                    "
+                                    title="
+                                        Baxmaq üçün klikləyin
+                                    "
+                                >
+                                    ${product.title}
+                                </div>
+
+
+                                <div
+                                    class="product-meta"
+                                >
+                                    Marka:
+                                    <strong>
+                                        ${product.brand}
+                                    </strong>
+                                    (${product.year})
+                                </div>
+
+
+                                <div
+                                    class="product-footer"
+                                >
+
+                                    <div
+                                        class="product-price"
+                                    >
+                                        ${product.price}
+                                        <span>
+                                            AZN
+                                        </span>
+                                    </div>
+
+
+                                    <div
+                                        class="btn-actions"
+                                    >
+
+                                        <button
+                                            class="btn-copy"
+                                            onclick="
+                                                copyLink(
+                                                    '${product.oem}'
+                                                )
+                                            "
+                                            title="
+                                                OEM Linkini Kopyala
+                                            "
+                                        >
+                                            🔗
+                                        </button>
+
+
+                                        <a
+                                            href="
+                                                https://wa.me/994500000000?text=${
+                                                    encodeURIComponent(
+                                                        `Salam, Bəyləroğlu saytından bu detal üçün yazıram:
+
+OEM Kod: ${product.oem}
+Detal: ${product.title}
+Qiymət: ${product.price} AZN`
+                                                    )
+                                                }
+                                            "
+                                            target="_blank"
+                                            class="btn-buy"
+                                        >
+                                            Sifariş
+                                        </a>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    `)
+                    .join("");
+
+        }
+
+
+        // =====================================================
+        // CODE LOOKUP
+        // =====================================================
+
+        function lookupCode(searchCode) {
+
+            const cleanCode =
+                searchCode
+                    .trim()
+                    .toUpperCase();
+
+
+            const found =
+                products.find(product =>
+                    product.oem
+                        .toUpperCase() ===
+                        cleanCode ||
+
+                    product.code
+                        .toUpperCase() ===
+                        cleanCode
+                );
+
+
+            if (!found) {
+
+                showToast(
+                    `❌ Kod tapılmadı: ${searchCode}`
+                );
+
+                return;
+            }
+
+
+            openDetail(
+                found.oem
+            );
+
+
+            const searchInput =
+                document.getElementById(
+                    "searchInput"
+                );
+
+
+            const codeFilter =
+                document.getElementById(
+                    "codeFilter"
+                );
+
+
+            if (searchInput) {
+                searchInput.value =
+                    found.oem;
+            }
+
+
+            if (codeFilter) {
+                codeFilter.value =
+                    found.oem;
+            }
+
+
+            filterProducts();
+
+        }
+
+
+        // =====================================================
+        // PRODUCT DETAIL
+        // =====================================================
+
+        function openDetail(oemCode) {
+
+            const cleanCode =
+                oemCode
+                    .trim()
+                    .toUpperCase();
+
+
+            const item =
+                products.find(product =>
+                    product.oem
+                        .toUpperCase() ===
+                        cleanCode ||
+
+                    product.code
+                        .toUpperCase() ===
+                        cleanCode
+                );
+
+
+            if (!item) {
+                return;
+            }
+
+
+            const detailContent =
+                document.getElementById(
+                    "detailContent"
+                );
+
+
+            detailContent.innerHTML = `
+
+                <div
+                    style="
+                        width: 100%;
+                        height: 210px;
+                        border-radius: 10px;
+                        overflow: hidden;
+                        margin-bottom: 14px;
+                        border: 1px solid #cbd5e1;
+                    "
+                >
+
+                    <img
+                        src="${item.img}"
+                        alt="${item.title}"
+                        style="
+                            width: 100%;
+                            height: 100%;
+                            object-fit: cover;
+                        "
+                        onerror="
+                            this.src =
+                            'https://images.unsplash.com/photo-1486006920555-c77dce18193b?auto=format&fit=crop&w=600&q=80'
+                        "
+                    >
+
+                </div>
+
+
+                <div
+                    style="
+                        display: flex;
+                        justify-content: center;
+                        gap: 8px;
+                        margin-bottom: 8px;
+                    "
+                >
+
+                    <span
+                        style="
+                            background: #e0f2fe;
+                            color: #0369a1;
+                            padding: 4px 10px;
+                            border-radius: 6px;
+                            font-weight: bold;
+                            font-family: monospace;
+                            font-size: 12px;
+                        "
+                    >
+                        🔑 ${item.code}
+                    </span>
+
+
+                    <span
+                        style="
+                            background: #f1f5f9;
+                            color: #0f172a;
+                            padding: 4px 10px;
+                            border-radius: 6px;
+                            font-weight: bold;
+                            font-family: monospace;
+                            font-size: 12px;
+                            border: 1px solid #cbd5e1;
+                        "
+                    >
+                        OEM: ${item.oem}
+                    </span>
+
+                </div>
+
+
+                <h3
+                    style="
+                        font-size: 17px;
+                        margin-bottom: 6px;
+                        color: #0f172a;
+                    "
+                >
+                    ${item.title}
+                </h3>
+
+
+                <div
+                    style="
+                        background: #f8fafc;
+                        padding: 10px 14px;
+                        border-radius: 8px;
+                        margin-bottom: 12px;
+                        text-align: left;
+                        font-size: 13px;
+                        border: 1px solid #e2e8f0;
+                    "
+                >
+
+                    <div>
+                        <strong>
+                            Marka:
+                        </strong>
+
+                        ${item.brand}
+                    </div>
+
+
+                    <div>
+                        <strong>
+                            Model İli:
+                        </strong>
+
+                        ${item.year}
+                    </div>
+
+
+                    <div>
+                        <strong>
+                            Vəziyyət:
+                        </strong>
+
+                        ${item.condition}
+                    </div>
+
+                </div>
+
+
+                <div
+                    style="
+                        font-size: 24px;
+                        font-weight: 900;
+                        color: #0284c7;
+                        margin-bottom: 14px;
+                    "
+                >
+                    ${item.price} AZN
+                </div>
+
+
+                <div
+                    style="
+                        display: flex;
+                        gap: 8px;
+                    "
+                >
+
+                    <button
+                        onclick="
+                            copyLink(
+                                '${item.oem}'
+                            )
+                        "
+                        style="
+                            flex: 1;
+                            padding: 10px;
+                            background: #f1f5f9;
+                            border: 1px solid #cbd5e1;
+                            border-radius: 6px;
+                            cursor: pointer;
+                            font-weight: bold;
+                        "
+                    >
+                        🔗 OEM Linki Kopyala
+                    </button>
+
+
+                    <a
+                        href="
+                            https://wa.me/994500000000?text=${
+                                encodeURIComponent(
+                                    `Salam, Bəyləroğlu saytından ${item.oem} OEM kodlu detalı almaq istəyirəm:
+
+${item.title}
+Qiymət: ${item.price} AZN`
+                                )
+                            }
+                        "
+                        target="_blank"
+                        style="
+                            flex: 1;
+                            padding: 10px;
+                            background: #10b981;
+                            color: white;
+                            text-decoration: none;
+                            border-radius: 6px;
+                            font-weight: bold;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                        "
+                    >
+                        WhatsApp Sifariş
+                    </a>
+
+                </div>
+
+            `;
+
+
+            document.getElementById(
+                "detailModal"
+            ).style.display = "flex";
+
+        }
+
+
+        // =====================================================
+        // MODALS
+        // =====================================================
+
+        function closeModal(id) {
+
+            const modal =
+                document.getElementById(id);
+
+
+            if (modal) {
+                modal.style.display =
+                    "none";
+            }
+
+        }
+
+
+        function openAddModal() {
+
+            document.getElementById(
+                "addModal"
+            ).style.display = "flex";
+
+        }
+
+
+        function openDirectCodePrompt() {
+
+            const entered =
+                prompt(
+                    "Zəhmət olmasa OEM Kodu (məs: 45510-06060) və ya Xüsusi Kodu daxil edin:"
+                );
+
+
+            if (entered) {
+                lookupCode(entered);
+            }
+
+        }
+
+
+        function quickFill(code) {
+
+            const searchInput =
+                document.getElementById(
+                    "searchInput"
+                );
+
+
+            const codeFilter =
+                document.getElementById(
+                    "codeFilter"
+                );
+
+
+            if (searchInput) {
+                searchInput.value =
+                    code;
+            }
+
+
+            if (codeFilter) {
+                codeFilter.value =
+                    code;
+            }
+
+
+            lookupCode(code);
+
+        }
+
+
+        // =====================================================
+        // COPY LINK
+        // =====================================================
+
+        async function copyLink(code) {
+
+            const url =
+                window.location.origin +
+                window.location.pathname +
+                "?oem=" +
+                encodeURIComponent(code);
+
+
+            try {
+
+                await navigator.clipboard
+                    .writeText(url);
+
+
+                showToast(
+                    `✅ OEM Kod linki kopyalandı: ${code}`
+                );
+
+            } catch (error) {
+
+                console.error(
+                    "Link kopyalana bilmədi:",
+                    error
+                );
+
+
+                showToast(
+                    "❌ Link kopyalana bilmədi!"
+                );
+
+            }
+
+        }
+
+
+        // =====================================================
+        // RESET FILTERS
+        // =====================================================
+
+        function resetFilters() {
+
+            const searchInput =
+                document.getElementById(
+                    "searchInput"
+                );
+
+
+            const codeFilter =
+                document.getElementById(
+                    "codeFilter"
+                );
+
+
+            const brandSelect =
+                document.getElementById(
+                    "brandSelect"
+                );
+
+
+            const conditionSelect =
+                document.getElementById(
+                    "conditionSelect"
+                );
+
+
+            if (searchInput) {
+                searchInput.value = "";
+            }
+
+
+            if (codeFilter) {
+                codeFilter.value = "";
+            }
+
+
+            if (brandSelect) {
+                brandSelect.value = "all";
+            }
+
+
+            if (conditionSelect) {
+                conditionSelect.value = "all";
+            }
+
+
+            filterProducts();
+
+        }
+
+
+        // =====================================================
+        // ADD PRODUCT
+        // =====================================================
+
+        async function handleAddProduct(event) {
+
+            event.preventDefault();
+
+
+            const code =
+                document
+                    .getElementById("newCode")
+                    .value
+                    .trim()
+                    .toUpperCase();
+
+
+            const oem =
+                document
+                    .getElementById("newOem")
+                    .value
+                    .trim()
+                    .toUpperCase();
+
+
+            const title =
+                document
+                    .getElementById("newTitle")
+                    .value
+                    .trim();
+
+
+            const brand =
+                document
+                    .getElementById("newBrand")
+                    .value
+                    .trim();
+
+
+            const price =
+                parseFloat(
+                    document
+                        .getElementById("newPrice")
+                        .value
+                );
+
+
+            const img =
+                document
+                    .getElementById("newImg")
+                    .value
+                    .trim() ||
+
+                "https://images.unsplash.com/photo-1486006920555-c77dce18193b?auto=format&fit=crop&w=600&q=80";
+
+
+            const newProduct = {
+                code,
+                oem,
+                title,
+                brand,
+                price,
+
+                condition:
+                    "İşlənmiş (Ölüxana)",
+
+                year:
+                    "2015-2023",
+
+                img
+            };
+
+
+            try {
+
+                const documentReference =
+                    await addDoc(
+                        collection(
+                            db,
+                            "detallar"
+                        ),
+                        newProduct
+                    );
+
+
+                products.unshift({
+                    id:
+                        documentReference.id,
+
+                    ...newProduct
+                });
+
+
+                closeModal(
+                    "addModal"
+                );
+
+
+                document
+                    .querySelector(
+                        "#addModal form"
+                    )
+                    ?.reset();
+
+
+                filterProducts();
+
+
+                showToast(
+                    `✅ OEM Kod: ${oem} bazaya uğurla yazıldı!`
+                );
+
+            } catch (error) {
+
+                console.error(
+                    "Firebase xətası:",
+                    error
+                );
+
+
+                showToast(
+                    "❌ Məlumat bazaya əlavə edilə bilmədi!"
+                );
+
+            }
+
+        }
+
+
+        // =====================================================
+        // TOAST
+        // =====================================================
+
+        function showToast(message) {
+
+            const toast =
+                document.getElementById(
+                    "toastNotify"
+                );
+
+
+            if (!toast) {
+                return;
+            }
+
+
+            toast.innerText =
+                message;
+
+
+            toast.style.display =
+                "block";
+
+
+            setTimeout(() => {
+
+                toast.style.display =
+                    "none";
+
+            }, 2800);
+
+        }
+
+
+        // =====================================================
+        // EXPOSE FUNCTIONS TO HTML
+        // =====================================================
+        //
+        // Because this is a module, functions are not
+        // automatically available to inline onclick=""
+        // and onsubmit="" handlers.
+        //
+        // These assignments make them available globally.
+        // =====================================================
+
+        window.handleSearchKey =
+            handleSearchKey;
+
+        window.filterProducts =
+            filterProducts;
+
+        window.lookupCode =
+            lookupCode;
+
+        window.openDetail =
+            openDetail;
+
+        window.closeModal =
+            closeModal;
+
+        window.openAddModal =
+            openAddModal;
+
+        window.openDirectCodePrompt =
+            openDirectCodePrompt;
+
+        window.quickFill =
+            quickFill;
+
+        window.copyLink =
+            copyLink;
+
+        window.resetFilters =
+            resetFilters;
+
+        window.handleAddProduct =
+            handleAddProduct;
+
+        window.showToast =
+            showToast;
+
+    </script>
+
+</body>
+</html>

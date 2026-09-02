@@ -759,316 +759,675 @@
         <p>Bütün növ avtomobil ehtiyat hissələri və orijinal OEM kod kataloqu &copy; 2026</p>
     </footer>
 
-    <script>
-        // Real Şəkillər və Dəqiq OEM Kodları ilə Təchiz Edilmiş Məhsullar
-        let products = [
-            {
-                code: 'BYL-001',
-                oem: '45510-06060',
-                title: 'Toyota Camry 55 Sükan Reikası (Rulavoy Kalonka)',
-                brand: 'Toyota',
-                price: 340,
-                condition: 'İşlənmiş (Ölüxana)',
-                year: '2014-2017',
-                img: 'https://images.unsplash.com/photo-1486006920555-c77dce18193b?auto=format&fit=crop&w=600&q=80'
-            },
-            {
-                code: 'BYL-002',
-                oem: '51117292947',
-                title: 'BMW F30 M-Tech Ön Bufer Komplekt',
-                brand: 'BMW',
-                price: 420,
-                condition: 'İşlənmiş (Ölüxana)',
-                year: '2012-2018',
-                img: 'https://images.unsplash.com/photo-1541348263662-e0c82661210e?auto=format&fit=crop&w=600&q=80'
-            },
-            {
-                code: 'BYL-003',
-                oem: 'A2048203159',
-                title: 'Mercedes-Benz W204 C-Class LED Far Sol (Orijinal)',
-                brand: 'Mercedes-Benz',
-                price: 480,
-                condition: 'İşlənmiş (Ölüxana)',
-                year: '2011-2014',
-                img: 'https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&w=600&q=80'
-            },
-            {
-                code: 'BYL-004',
-                oem: 'G9510-47031',
-                title: 'Toyota Prius 30 Hibrid Batareya Bloku (Orijinal Yapon)',
-                brand: 'Toyota',
-                price: 850,
-                condition: 'İşlənmiş (Ölüxana)',
-                year: '2009-2015',
-                img: 'https://images.unsplash.com/photo-1558441719-aa344554a1ad?auto=format&fit=crop&w=600&q=80'
-            },
-            {
-                code: 'BYL-005',
-                oem: '86350-F2000',
-                title: 'Hyundai Elantra Ön Radiator Barmaqlığı (Abtovka Xrom)',
-                brand: 'Hyundai',
-                price: 115,
-                condition: 'Yeni Təzə',
-                year: '2016-2020',
-                img: 'https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=600&q=80'
-            },
-            {
-                code: 'BYL-006',
-                oem: '12148641149',
-                title: 'BMW F10 N20 Mühərrik Beyni (ECU Kompüter)',
-                brand: 'BMW',
-                price: 590,
-                condition: 'İşlənmiş (Ölüxana)',
-                year: '2011-2016',
-                img: 'https://images.unsplash.com/photo-1517524008697-84bbe3c3fd98?auto=format&fit=crop&w=600&q=80'
-            },
-            {
-                code: 'BYL-007',
-                oem: '13427404',
-                title: 'Chevrolet Cruze 1.4 Turbo Radiator Pəri (Diffuzor)',
-                brand: 'Chevrolet',
-                price: 140,
-                condition: 'Yeni Təzə',
-                year: '2011-2016',
-                img: 'https://images.unsplash.com/photo-1580273916550-e323be2ae537?auto=format&fit=crop&w=600&q=80'
-            },
-            {
-                code: 'BYL-008',
-                oem: 'A2128200864',
-                title: 'Mercedes-Benz W212 E-Class LED Arxa Stop Fara Sağ',
-                brand: 'Mercedes-Benz',
-                price: 270,
-                condition: 'İşlənmiş (Ölüxana)',
-                year: '2009-2013',
-                img: 'https://images.unsplash.com/photo-1617814076367-b759c7d7e738?auto=format&fit=crop&w=600&q=80'
-            }
-        ];
-
-        window.onload = function() {
-            filterProducts();
-            checkUrlCode();
-        };
-
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js";
-        import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-analytics.js";
-        import { getFirestore, collection, addDoc, getDocs } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js";
-
-        const firebaseConfig = {
-            apiKey: "AIzaSyCD_ajS9tZUGJPjs4x_fdJG5seQL_wJ-2E",
-            authDomain: "beyleroglu-b4582.firebaseapp.com",
-            projectId: "beyleroglu-b4582",
-            storageBucket: "beyleroglu-b4582.firebasestorage.app",
-            messagingSenderId: "533599991009",
-            appId: "1:533599991009:web:0ec398b6dc9ed59b8433a0",
-            measurementId: "G-94E6XZ4833"
-        };
-
-        const app = initializeApp(firebaseConfig);
-        const analytics = getAnalytics(app);
-        
-        // Bazanı işə salırıq
-        const db = getFirestore(app);
-
-        // URL-dən OEM kod və ya xüsusi kodla birbaşa daxil olma (məs: ?oem=45510-06060 və ya ?kod=BYL-001)
-        function checkUrlCode() {
-            const urlParams = new URLSearchParams(window.location.search);
-            const oem = urlParams.get('oem') || urlParams.get('kod') || urlParams.get('code');
-            if (oem) lookupCode(oem);
+```html
+<script>
+    // Real şəkillər və dəqiq OEM kodları ilə təchiz edilmiş məhsullar
+    let products = [
+        {
+            code: 'BYL-001',
+            oem: '45510-06060',
+            title: 'Toyota Camry 55 Sükan Reikası (Rulavoy Kalonka)',
+            brand: 'Toyota',
+            price: 340,
+            condition: 'İşlənmiş (Ölüxana)',
+            year: '2014-2017',
+            img: 'https://images.unsplash.com/photo-1486006920555-c77dce18193b?auto=format&fit=crop&w=600&q=80'
+        },
+        {
+            code: 'BYL-002',
+            oem: '51117292947',
+            title: 'BMW F30 M-Tech Ön Bufer Komplekt',
+            brand: 'BMW',
+            price: 420,
+            condition: 'İşlənmiş (Ölüxana)',
+            year: '2012-2018',
+            img: 'https://images.unsplash.com/photo-1541348263662-e0c82661210e?auto=format&fit=crop&w=600&q=80'
+        },
+        {
+            code: 'BYL-003',
+            oem: 'A2048203159',
+            title: 'Mercedes-Benz W204 C-Class LED Far Sol (Orijinal)',
+            brand: 'Mercedes-Benz',
+            price: 480,
+            condition: 'İşlənmiş (Ölüxana)',
+            year: '2011-2014',
+            img: 'https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&w=600&q=80'
+        },
+        {
+            code: 'BYL-004',
+            oem: 'G9510-47031',
+            title: 'Toyota Prius 30 Hibrid Batareya Bloku (Orijinal Yapon)',
+            brand: 'Toyota',
+            price: 850,
+            condition: 'İşlənmiş (Ölüxana)',
+            year: '2009-2015',
+            img: 'https://images.unsplash.com/photo-1558441719-aa344554a1ad?auto=format&fit=crop&w=600&q=80'
+        },
+        {
+            code: 'BYL-005',
+            oem: '86350-F2000',
+            title: 'Hyundai Elantra Ön Radiator Barmaqlığı (Abtovka Xrom)',
+            brand: 'Hyundai',
+            price: 115,
+            condition: 'Yeni Təzə',
+            year: '2016-2020',
+            img: 'https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=600&q=80'
+        },
+        {
+            code: 'BYL-006',
+            oem: '12148641149',
+            title: 'BMW F10 N20 Mühərrik Beyni (ECU Kompüter)',
+            brand: 'BMW',
+            price: 590,
+            condition: 'İşlənmiş (Ölüxana)',
+            year: '2011-2016',
+            img: 'https://images.unsplash.com/photo-1517524008697-84bbe3c3fd98?auto=format&fit=crop&w=600&q=80'
+        },
+        {
+            code: 'BYL-007',
+            oem: '13427404',
+            title: 'Chevrolet Cruze 1.4 Turbo Radiator Pəri (Diffuzor)',
+            brand: 'Chevrolet',
+            price: 140,
+            condition: 'Yeni Təzə',
+            year: '2011-2016',
+            img: 'https://images.unsplash.com/photo-1580273916550-e323be2ae537?auto=format&fit=crop&w=600&q=80'
+        },
+        {
+            code: 'BYL-008',
+            oem: 'A2128200864',
+            title: 'Mercedes-Benz W212 E-Class LED Arxa Stop Fara Sağ',
+            brand: 'Mercedes-Benz',
+            price: 270,
+            condition: 'İşlənmiş (Ölüxana)',
+            year: '2009-2013',
+            img: 'https://images.unsplash.com/photo-1617814076367-b759c7d7e738?auto=format&fit=crop&w=600&q=80'
         }
+    ];
 
-        function handleSearchKey(e) {
-            if (e.key === 'Enter') {
-                const val = document.getElementById('searchInput').value.trim();
-                if (val.length > 2) lookupCode(val);
-                else filterProducts();
+    window.onload = function () {
+        filterProducts();
+        checkUrlCode();
+    };
+
+    // URL-dən OEM və ya xüsusi kodla birbaşa daxil olma
+    // Məsələn: ?oem=45510-06060 və ya ?kod=BYL-001
+    function checkUrlCode() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const oem =
+            urlParams.get('oem') ||
+            urlParams.get('kod') ||
+            urlParams.get('code');
+
+        if (oem) {
+            lookupCode(oem);
+        }
+    }
+
+    function handleSearchKey(e) {
+        if (e.key === 'Enter') {
+            const value = document
+                .getElementById('searchInput')
+                .value
+                .trim();
+
+            if (value.length > 2) {
+                lookupCode(value);
             } else {
                 filterProducts();
             }
+        } else {
+            filterProducts();
+        }
+    }
+
+    function filterProducts() {
+        const searchValue = document
+            .getElementById('searchInput')
+            ?.value
+            .toLowerCase()
+            .trim() || '';
+
+        const codeValue = document
+            .getElementById('codeFilter')
+            ?.value
+            .toLowerCase()
+            .trim() || '';
+
+        const brandValue =
+            document.getElementById('brandSelect')?.value || 'all';
+
+        const conditionValue =
+            document.getElementById('conditionSelect')?.value || 'all';
+
+        const filtered = products.filter(product => {
+            const matchBrand =
+                brandValue === 'all' ||
+                product.brand === brandValue;
+
+            const matchCondition =
+                conditionValue === 'all' ||
+                product.condition === conditionValue;
+
+            const matchCode =
+                !codeValue ||
+                product.oem.toLowerCase().includes(codeValue) ||
+                product.code.toLowerCase().includes(codeValue);
+
+            const matchSearch =
+                !searchValue ||
+                product.oem.toLowerCase().includes(searchValue) ||
+                product.code.toLowerCase().includes(searchValue) ||
+                product.title.toLowerCase().includes(searchValue) ||
+                product.brand.toLowerCase().includes(searchValue);
+
+            return (
+                matchBrand &&
+                matchCondition &&
+                matchCode &&
+                matchSearch
+            );
+        });
+
+        renderGrid(filtered);
+    }
+
+    function renderGrid(list) {
+        const grid = document.getElementById('productGrid');
+
+        if (!grid) {
+            return;
         }
 
-        function filterProducts() {
-            const sVal = (document.getElementById('searchInput') ? document.getElementById('searchInput').value.toLowerCase().trim() : '');
-            const cVal = (document.getElementById('codeFilter') ? document.getElementById('codeFilter').value.toLowerCase().trim() : '');
-            const bVal = (document.getElementById('brandSelect') ? document.getElementById('brandSelect').value : 'all');
-            const condVal = (document.getElementById('conditionSelect') ? document.getElementById('conditionSelect').value : 'all');
+        const countElement = document.getElementById('catalogCount');
 
-            const filtered = products.filter(p => {
-                const matchBrand = (bVal === 'all' || p.brand === bVal);
-                const matchCondition = (condVal === 'all' || p.condition === condVal);
-                
-                const matchCode = !cVal || 
-                    p.oem.toLowerCase().includes(cVal) || 
-                    p.code.toLowerCase().includes(cVal);
-                
-                const matchSearch = !sVal || 
-                    p.oem.toLowerCase().includes(sVal) || 
-                    p.code.toLowerCase().includes(sVal) || 
-                    p.title.toLowerCase().includes(sVal) || 
-                    p.brand.toLowerCase().includes(sVal);
-
-                return matchBrand && matchCondition && matchCode && matchSearch;
-            });
-
-            renderGrid(filtered);
+        if (countElement) {
+            countElement.innerText =
+                `${list.length} ədəd detal göstərilir`;
         }
 
-        function renderGrid(list) {
-            const grid = document.getElementById('productGrid');
-            if (!grid) return;
-            const countEl = document.getElementById('catalogCount');
-            if (countEl) countEl.innerText = `${list.length} ədəd detal göstərilir`;
+        if (list.length === 0) {
+            grid.innerHTML = `
+                <div
+                    style="
+                        grid-column: 1/-1;
+                        text-align: center;
+                        padding: 50px 20px;
+                        color: #94a3b8;
+                        background: rgba(11, 37, 69, 0.5);
+                        border-radius: 12px;
+                    "
+                >
+                    Axtarışa uyğun OEM kod və ya detal tapılmadı.
+                </div>
+            `;
 
-            if (list.length === 0) {
-                grid.innerHTML = '<div style="grid-column:1/-1; text-align:center; padding:50px 20px; color:#94a3b8; background:rgba(11,37,69,0.5); border-radius:12px;">Axtarışa uyğun OEM kod və ya detal tapılmadı.</div>';
-                return;
-            }
+            return;
+        }
 
-            grid.innerHTML = list.map(p => `
+        grid.innerHTML = list
+            .map(product => `
                 <div class="product-card">
                     <div class="product-img-wrapper">
-                        <span class="product-tag ${p.condition.includes('İşlənmiş') ? 'tag-used' : 'tag-new'}">${p.condition}</span>
-                        <span class="part-code-badge">${p.code}</span>
-                        <img src="${p.img}" alt="${p.title}" onerror="this.src='https://images.unsplash.com/photo-1486006920555-c77dce18193b?auto=format&fit=crop&w=600&q=80';">
+
+                        <span
+                            class="product-tag ${
+                                product.condition.includes('İşlənmiş')
+                                    ? 'tag-used'
+                                    : 'tag-new'
+                            }"
+                        >
+                            ${product.condition}
+                        </span>
+
+                        <span class="part-code-badge">
+                            ${product.code}
+                        </span>
+
+                        <img
+                            src="${product.img}"
+                            alt="${product.title}"
+                            onerror="
+                                this.src='https://images.unsplash.com/photo-1486006920555-c77dce18193b?auto=format&fit=crop&w=600&q=80'
+                            "
+                        >
                     </div>
+
                     <div class="product-body">
+
                         <div class="code-row">
-                            <span class="product-id-pill">🔑 ${p.code}</span>
-                            <span class="product-oem-tag">OEM: ${p.oem}</span>
+                            <span class="product-id-pill">
+                                🔑 ${product.code}
+                            </span>
+
+                            <span class="product-oem-tag">
+                                OEM: ${product.oem}
+                            </span>
                         </div>
-                        <div class="product-title" onclick="openDetail('${p.oem}')" title="Baxmaq üçün klikləyin">${p.title}</div>
-                        <div class="product-meta">Marka: <strong>${p.brand}</strong> (${p.year})</div>
+
+                        <div
+                            class="product-title"
+                            onclick="openDetail('${product.oem}')"
+                            title="Baxmaq üçün klikləyin"
+                        >
+                            ${product.title}
+                        </div>
+
+                        <div class="product-meta">
+                            Marka:
+                            <strong>${product.brand}</strong>
+                            (${product.year})
+                        </div>
+
                         <div class="product-footer">
-                            <div class="product-price">${p.price} <span>AZN</span></div>
+
+                            <div class="product-price">
+                                ${product.price}
+                                <span>AZN</span>
+                            </div>
+
                             <div class="btn-actions">
-                                <button class="btn-copy" onclick="copyLink('${p.oem}')" title="OEM Linkini Kopyala">🔗</button>
-                                <a href="https://wa.me/994500000000?text=${encodeURIComponent('Salam, Bəyləroğlu saytından bu detal üçün yazıram:\n\nOEM Kod: ' + p.oem + '\nDetal: ' + p.title + '\nQiymət: ' + p.price + ' AZN')}" target="_blank" class="btn-buy">Sifariş</a>
+
+                                <button
+                                    class="btn-copy"
+                                    onclick="copyLink('${product.oem}')"
+                                    title="OEM Linkini Kopyala"
+                                >
+                                    🔗
+                                </button>
+
+                                <a
+                                    href="https://wa.me/994500000000?text=${encodeURIComponent(
+                                        `Salam, Bəyləroğlu saytından bu detal üçün yazıram:\n\n` +
+                                        `OEM Kod: ${product.oem}\n` +
+                                        `Detal: ${product.title}\n` +
+                                        `Qiymət: ${product.price} AZN`
+                                    )}"
+                                    target="_blank"
+                                    class="btn-buy"
+                                >
+                                    Sifariş
+                                </a>
+
                             </div>
                         </div>
                     </div>
                 </div>
-            `).join('');
-        }
+            `)
+            .join('');
+    }
 
-        // OEM Kod və ya Xüsusi Kod ilə axtarış
-        function lookupCode(searchCode) {
-            const clean = searchCode.trim().toUpperCase();
-            const found = products.find(p => p.oem.toUpperCase() === clean || p.code.toUpperCase() === clean);
+    // OEM və ya xüsusi kod ilə axtarış
+    function lookupCode(searchCode) {
+        const cleanCode = searchCode.trim().toUpperCase();
 
-            if (found) {
-                openDetail(found.oem);
-                if (document.getElementById('searchInput')) document.getElementById('searchInput').value = found.oem;
-                if (document.getElementById('codeFilter')) document.getElementById('codeFilter').value = found.oem;
-                filterProducts();
-            } else {
-                showToast('❌ Kod tapılmadı: ' + searchCode);
+        const found = products.find(product =>
+            product.oem.toUpperCase() === cleanCode ||
+            product.code.toUpperCase() === cleanCode
+        );
+
+        if (found) {
+            openDetail(found.oem);
+
+            const searchInput = document.getElementById('searchInput');
+            const codeFilter = document.getElementById('codeFilter');
+
+            if (searchInput) {
+                searchInput.value = found.oem;
             }
-        }
 
-        function openDetail(oemCode) {
-            const item = products.find(p => p.oem.toUpperCase() === oemCode.toUpperCase() || p.code.toUpperCase() === oemCode.toUpperCase());
-            if (!item) return;
+            if (codeFilter) {
+                codeFilter.value = found.oem;
+            }
 
-            document.getElementById('detailContent').innerHTML = `
-                <div style="width:100%; height:210px; border-radius:10px; overflow:hidden; margin-bottom:14px; border:1px solid #cbd5e1;">
-                    <img src="${item.img}" style="width:100%; height:100%; object-fit:cover;" onerror="this.src='https://images.unsplash.com/photo-1486006920555-c77dce18193b?auto=format&fit=crop&w=600&q=80';">
-                </div>
-                <div style="display:flex; justify-content:center; gap:8px; margin-bottom:8px;">
-                    <span style="background:#e0f2fe; color:#0369a1; padding:4px 10px; border-radius:6px; font-weight:bold; font-family:monospace; font-size:12px;">🔑 ${item.code}</span>
-                    <span style="background:#f1f5f9; color:#0f172a; padding:4px 10px; border-radius:6px; font-weight:bold; font-family:monospace; font-size:12px; border:1px solid #cbd5e1;">OEM: ${item.oem}</span>
-                </div>
-                <h3 style="font-size:17px; margin-bottom:6px; color:#0f172a;">${item.title}</h3>
-                <div style="background:#f8fafc; padding:10px 14px; border-radius:8px; margin-bottom:12px; text-align:left; font-size:13px; border:1px solid #e2e8f0;">
-                    <div><strong>Marka:</strong> ${item.brand}</div>
-                    <div><strong>Model İli:</strong> ${item.year}</div>
-                    <div><strong>Vəziyyət:</strong> ${item.condition}</div>
-                </div>
-                <div style="font-size:24px; font-weight:900; color:#0284c7; margin-bottom:14px;">${item.price} AZN</div>
-                <div style="display:flex; gap:8px;">
-                    <button onclick="copyLink('${item.oem}')" style="flex:1; padding:10px; background:#f1f5f9; border:1px solid #cbd5e1; border-radius:6px; cursor:pointer; font-weight:bold;">🔗 OEM Linki Kopyala</button>
-                    <a href="https://wa.me/994500000000?text=${encodeURIComponent('Salam, Bəyləroğlu saytından ' + item.oem + ' OEM kodlu detalı almaq istəyirəm:\n\n' + item.title + '\nQiymət: ' + item.price + ' AZN')}" target="_blank" style="flex:1; padding:10px; background:#10b981; color:white; text-decoration:none; border-radius:6px; font-weight:bold; display:flex; align-items:center; justify-content:center;">WhatsApp Sifariş</a>
-                </div>
-            `;
-            document.getElementById('detailModal').style.display = 'flex';
-        }
-
-        function closeModal(id) {
-            document.getElementById(id).style.display = 'none';
-        }
-
-        function openAddModal() {
-            document.getElementById('addModal').style.display = 'flex';
-        }
-
-        function openDirectCodePrompt() {
-            const entered = prompt('Zəhmət olmasa OEM Kodu (məs: 45510-06060) və ya Xüsusi Kodu daxil edin:');
-            if (entered) lookupCode(entered);
-        }
-
-        function quickFill(code) {
-            if (document.getElementById('searchInput')) document.getElementById('searchInput').value = code;
-            if (document.getElementById('codeFilter')) document.getElementById('codeFilter').value = code;
-            lookupCode(code);
-        }
-
-        function copyLink(code) {
-            const url = window.location.origin + window.location.pathname + '?oem=' + encodeURIComponent(code);
-            navigator.clipboard.writeText(url);
-            showToast('✅ OEM Kod linki kopyalandı: ' + code);
-        }
-
-        function resetFilters() {
-            if (document.getElementById('searchInput')) document.getElementById('searchInput').value = '';
-            if (document.getElementById('codeFilter')) document.getElementById('codeFilter').value = '';
-            if (document.getElementById('brandSelect')) document.getElementById('brandSelect').value = 'all';
-            if (document.getElementById('conditionSelect')) document.getElementById('conditionSelect').value = 'all';
             filterProducts();
+        } else {
+            showToast(`❌ Kod tapılmadı: ${searchCode}`);
+        }
+    }
+
+    function openDetail(oemCode) {
+        const item = products.find(product =>
+            product.oem.toUpperCase() === oemCode.toUpperCase() ||
+            product.code.toUpperCase() === oemCode.toUpperCase()
+        );
+
+        if (!item) {
+            return;
         }
 
-        async function handleAddProduct(e) {
-            e.preventDefault();
-            const code = document.getElementById('newCode').value.trim().toUpperCase();
-            const oem = document.getElementById('newOem').value.trim().toUpperCase();
-            const title = document.getElementById('newTitle').value;
-            const brand = document.getElementById('newBrand').value;
-            const price = parseFloat(document.getElementById('newPrice').value);
-            const img = document.getElementById('newImg').value || 'https://images.unsplash.com/photo-1486006920555-c77dce18193b?auto=format&fit=crop&w=600&q=80';
+        document.getElementById('detailContent').innerHTML = `
+            <div
+                style="
+                    width: 100%;
+                    height: 210px;
+                    border-radius: 10px;
+                    overflow: hidden;
+                    margin-bottom: 14px;
+                    border: 1px solid #cbd5e1;
+                "
+            >
+                <img
+                    src="${item.img}"
+                    style="
+                        width: 100%;
+                        height: 100%;
+                        object-fit: cover;
+                    "
+                    onerror="
+                        this.src='https://images.unsplash.com/photo-1486006920555-c77dce18193b?auto=format&fit=crop&w=600&q=80'
+                    "
+                >
+            </div>
 
-            const yeniDetal = {
-                code: code,
-                oem: oem,
-                title: title,
-                brand: brand,
-                price: price,
-                condition: 'İşlənmiş (Ölüxana)',
-                year: '2015-2023',
-                img: img
-            };
+            <div
+                style="
+                    display: flex;
+                    justify-content: center;
+                    gap: 8px;
+                    margin-bottom: 8px;
+                "
+            >
+                <span
+                    style="
+                        background: #e0f2fe;
+                        color: #0369a1;
+                        padding: 4px 10px;
+                        border-radius: 6px;
+                        font-weight: bold;
+                        font-family: monospace;
+                        font-size: 12px;
+                    "
+                >
+                    🔑 ${item.code}
+                </span>
 
-            try {
-                // Məlumatı birbaşa Firebase Firestore bazasına göndəririk
-                await addDoc(collection(db, "detallar"), yeniDetal);
-                
-                // Həm də lokal siyahıya əlavə edirik ki, səhifəni yeniləmədən dərhal ekranda görəsən
-                products.unshift(yeniDetal);
+                <span
+                    style="
+                        background: #f1f5f9;
+                        color: #0f172a;
+                        padding: 4px 10px;
+                        border-radius: 6px;
+                        font-weight: bold;
+                        font-family: monospace;
+                        font-size: 12px;
+                        border: 1px solid #cbd5e1;
+                    "
+                >
+                    OEM: ${item.oem}
+                </span>
+            </div>
 
-                closeModal('addModal');
-                filterProducts();
-                showToast(`✅ OEM Kod: ${oem} bazaya uğurla yazıldı!`);
-            } catch (error) {
-                console.error("Xəta baş verdi: ", error);
-                showToast(`❌ Xəta baş verdi!`);
-            }
+            <h3
+                style="
+                    font-size: 17px;
+                    margin-bottom: 6px;
+                    color: #0f172a;
+                "
+            >
+                ${item.title}
+            </h3>
+
+            <div
+                style="
+                    background: #f8fafc;
+                    padding: 10px 14px;
+                    border-radius: 8px;
+                    margin-bottom: 12px;
+                    text-align: left;
+                    font-size: 13px;
+                    border: 1px solid #e2e8f0;
+                "
+            >
+                <div>
+                    <strong>Marka:</strong>
+                    ${item.brand}
+                </div>
+
+                <div>
+                    <strong>Model İli:</strong>
+                    ${item.year}
+                </div>
+
+                <div>
+                    <strong>Vəziyyət:</strong>
+                    ${item.condition}
+                </div>
+            </div>
+
+            <div
+                style="
+                    font-size: 24px;
+                    font-weight: 900;
+                    color: #0284c7;
+                    margin-bottom: 14px;
+                "
+            >
+                ${item.price} AZN
+            </div>
+
+            <div style="display: flex; gap: 8px;">
+
+                <button
+                    onclick="copyLink('${item.oem}')"
+                    style="
+                        flex: 1;
+                        padding: 10px;
+                        background: #f1f5f9;
+                        border: 1px solid #cbd5e1;
+                        border-radius: 6px;
+                        cursor: pointer;
+                        font-weight: bold;
+                    "
+                >
+                    🔗 OEM Linki Kopyala
+                </button>
+
+                <a
+                    href="https://wa.me/994500000000?text=${encodeURIComponent(
+                        `Salam, Bəyləroğlu saytından ${item.oem} OEM kodlu detalı almaq istəyirəm:\n\n` +
+                        `${item.title}\n` +
+                        `Qiymət: ${item.price} AZN`
+                    )}"
+                    target="_blank"
+                    style="
+                        flex: 1;
+                        padding: 10px;
+                        background: #10b981;
+                        color: white;
+                        text-decoration: none;
+                        border-radius: 6px;
+                        font-weight: bold;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                    "
+                >
+                    WhatsApp Sifariş
+                </a>
+
+            </div>
+        `;
+
+        document.getElementById('detailModal').style.display = 'flex';
+    }
+
+    function closeModal(id) {
+        document.getElementById(id).style.display = 'none';
+    }
+
+    function openAddModal() {
+        document.getElementById('addModal').style.display = 'flex';
+    }
+
+    function openDirectCodePrompt() {
+        const entered = prompt(
+            'Zəhmət olmasa OEM Kodu (məs: 45510-06060) və ya Xüsusi Kodu daxil edin:'
+        );
+
+        if (entered) {
+            lookupCode(entered);
         }
-        
+    }
 
-        function showToast(msg) {
-            const t = document.getElementById('toastNotify');
-            if (!t) return;
-            t.innerText = msg;
-            t.style.display = 'block';
-            setTimeout(() => { t.style.display = 'none'; }, 2800);
+    function quickFill(code) {
+        const searchInput = document.getElementById('searchInput');
+        const codeFilter = document.getElementById('codeFilter');
+
+        if (searchInput) {
+            searchInput.value = code;
         }
-    </script>
 
+        if (codeFilter) {
+            codeFilter.value = code;
+        }
+
+        lookupCode(code);
+    }
+
+    function copyLink(code) {
+        const url =
+            window.location.origin +
+            window.location.pathname +
+            '?oem=' +
+            encodeURIComponent(code);
+
+        navigator.clipboard.writeText(url);
+
+        showToast(`✅ OEM Kod linki kopyalandı: ${code}`);
+    }
+
+    function resetFilters() {
+        const searchInput = document.getElementById('searchInput');
+        const codeFilter = document.getElementById('codeFilter');
+        const brandSelect = document.getElementById('brandSelect');
+        const conditionSelect = document.getElementById('conditionSelect');
+
+        if (searchInput) {
+            searchInput.value = '';
+        }
+
+        if (codeFilter) {
+            codeFilter.value = '';
+        }
+
+        if (brandSelect) {
+            brandSelect.value = 'all';
+        }
+
+        if (conditionSelect) {
+            conditionSelect.value = 'all';
+        }
+
+        filterProducts();
+    }
+
+    async function handleAddProduct(e) {
+        e.preventDefault();
+
+        const code = document
+            .getElementById('newCode')
+            .value
+            .trim()
+            .toUpperCase();
+
+        const oem = document
+            .getElementById('newOem')
+            .value
+            .trim()
+            .toUpperCase();
+
+        const title =
+            document.getElementById('newTitle').value;
+
+        const brand =
+            document.getElementById('newBrand').value;
+
+        const price =
+            parseFloat(document.getElementById('newPrice').value);
+
+        const img =
+            document.getElementById('newImg').value ||
+            'https://images.unsplash.com/photo-1486006920555-c77dce18193b?auto=format&fit=crop&w=600&q=80';
+
+        const yeniDetal = {
+            code,
+            oem,
+            title,
+            brand,
+            price,
+            condition: 'İşlənmiş (Ölüxana)',
+            year: '2015-2023',
+            img
+        };
+
+        try {
+            // Məlumatı Firebase Firestore bazasına göndəririk
+            await addDoc(
+                collection(db, 'detallar'),
+                yeniDetal
+            );
+
+            // Lokal siyahıya da əlavə edirik
+            products.unshift(yeniDetal);
+
+            closeModal('addModal');
+            filterProducts();
+
+            showToast(
+                `✅ OEM Kod: ${oem} bazaya uğurla yazıldı!`
+            );
+        } catch (error) {
+            console.error('Xəta baş verdi:', error);
+            showToast('❌ Xəta baş verdi!');
+        }
+    }
+
+    function showToast(message) {
+        const toast = document.getElementById('toastNotify');
+
+        if (!toast) {
+            return;
+        }
+
+        toast.innerText = message;
+        toast.style.display = 'block';
+
+        setTimeout(() => {
+            toast.style.display = 'none';
+        }, 2800);
+    }
+</script>
+
+<script type="module">
+    import { initializeApp } from
+        'https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js';
+
+    import { getAnalytics } from
+        'https://www.gstatic.com/firebasejs/12.18.0/firebase-analytics.js';
+
+    import {
+        getFirestore,
+        collection,
+        addDoc,
+        getDocs
+    } from 'https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js';
+
+    const firebaseConfig = {
+        apiKey: 'AIzaSyCD_ajS9tZUGJPjs4x_fdJG5seQL_wJ-2E',
+        authDomain: 'beyleroglu-b4582.firebaseapp.com',
+        projectId: 'beyleroglu-b4582',
+        storageBucket: 'beyleroglu-b4582.firebasestorage.app',
+        messagingSenderId: '533599991009',
+        appId: '1:533599991009:web:0ec398b6dc9ed59b8433a0',
+        measurementId: 'G-94E6XZ4833'
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const analytics = getAnalytics(app);
+
+    // Firestore bazasını işə salırıq
+    const db = getFirestore(app);
+</script>
 </body>
 </html>
