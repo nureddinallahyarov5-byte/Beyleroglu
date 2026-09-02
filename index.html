@@ -1045,9 +1045,19 @@
 
                 <button
                     class="btn-header"
+                    id="addPartBtn"
                     onclick="openAddModal()"
+                    style="display: none;"
                 >
                     + Detal Əlavə Et
+                </button>
+
+                <button
+                    class="btn-header"
+                    id="adminAuthBtn"
+                    onclick="handleAdminAuthClick()"
+                >
+                    🔐 Admin Girişi
                 </button>
 
             </div>
@@ -1471,6 +1481,85 @@
 
 
                 <div
+                    style="
+                        display: grid;
+                        grid-template-columns: 1fr 1fr;
+                        gap: 8px;
+                        margin-bottom: 10px;
+                    "
+                >
+
+                    <div>
+
+                        <label
+                            style="
+                                display: block;
+                                font-size: 12px;
+                                margin-bottom: 4px;
+                                font-weight: bold;
+                            "
+                        >
+                            İllər (Məs: 2015-2020):
+                        </label>
+
+                        <input
+                            type="text"
+                            id="newYear"
+                            class="filter-input"
+                            placeholder="2015-2020"
+                            required
+                            style="
+                                color: #0f172a;
+                                background: #f8fafc;
+                            "
+                        >
+
+                    </div>
+
+
+                    <div>
+
+                        <label
+                            style="
+                                display: block;
+                                font-size: 12px;
+                                margin-bottom: 4px;
+                                font-weight: bold;
+                            "
+                        >
+                            Vəziyyət:
+                        </label>
+
+                        <select
+                            id="newCondition"
+                            class="filter-select"
+                            required
+                            style="
+                                color: #0f172a;
+                                background: #f8fafc;
+                            "
+                        >
+                            <option
+                                value="İşlənmiş (Ölüxana)"
+                                style="color: #0f172a;"
+                            >
+                                İşlənmiş (Ölüxana)
+                            </option>
+
+                            <option
+                                value="Yeni Təzə"
+                                style="color: #0f172a;"
+                            >
+                                Yeni Təzə
+                            </option>
+                        </select>
+
+                    </div>
+
+                </div>
+
+
+                <div
                     style="margin-bottom: 12px;"
                 >
 
@@ -1514,6 +1603,133 @@
                     "
                 >
                     Kataloqa Əlavə Et
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         ADMIN LOGIN MODAL
+    ====================================================== -->
+
+    <div
+        class="modal-overlay"
+        id="adminLoginModal"
+    >
+
+        <div class="modal-box">
+
+            <div class="modal-header">
+
+                <h4>
+                    🔐 Admin Girişi
+                </h4>
+
+                <button
+                    class="close-btn"
+                    onclick="closeModal('adminLoginModal')"
+                >
+                    &times;
+                </button>
+
+            </div>
+
+
+            <form
+                onsubmit="handleAdminLogin(event)"
+            >
+
+                <div
+                    style="margin-bottom: 10px;"
+                >
+
+                    <label
+                        style="
+                            display: block;
+                            font-size: 12px;
+                            margin-bottom: 4px;
+                            font-weight: bold;
+                        "
+                    >
+                        E-poçt:
+                    </label>
+
+                    <input
+                        type="email"
+                        id="adminEmail"
+                        class="filter-input"
+                        placeholder="admin@beyleroglu.az"
+                        required
+                        style="
+                            color: #0f172a;
+                            background: #f8fafc;
+                        "
+                    >
+
+                </div>
+
+
+                <div
+                    style="margin-bottom: 12px;"
+                >
+
+                    <label
+                        style="
+                            display: block;
+                            font-size: 12px;
+                            margin-bottom: 4px;
+                            font-weight: bold;
+                        "
+                    >
+                        Şifrə:
+                    </label>
+
+                    <input
+                        type="password"
+                        id="adminPassword"
+                        class="filter-input"
+                        placeholder="••••••••"
+                        required
+                        style="
+                            color: #0f172a;
+                            background: #f8fafc;
+                        "
+                    >
+
+                </div>
+
+
+                <div
+                    id="adminLoginError"
+                    style="
+                        color: #dc2626;
+                        font-size: 12.5px;
+                        margin-bottom: 10px;
+                        display: none;
+                    "
+                >
+                </div>
+
+
+                <button
+                    type="submit"
+                    style="
+                        width: 100%;
+                        padding: 11px;
+                        background: #0284c7;
+                        color: white;
+                        border: none;
+                        border-radius: 6px;
+                        font-weight: bold;
+                        cursor: pointer;
+                        font-size: 14px;
+                    "
+                >
+                    Daxil Ol
                 </button>
 
             </form>
@@ -1573,9 +1789,19 @@
             getFirestore,
             collection,
             addDoc,
-            getDocs
+            getDocs,
+            doc,
+            getDoc
         } from
             "https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js";
+
+        import {
+            getAuth,
+            onAuthStateChanged,
+            signInWithEmailAndPassword,
+            signOut
+        } from
+            "https://www.gstatic.com/firebasejs/12.18.0/firebase-auth.js";
 
 
         // =====================================================
@@ -1615,6 +1841,91 @@
 
         const db =
             getFirestore(app);
+
+        const auth =
+            getAuth(app);
+
+
+        // =====================================================
+        // ADMIN STATE
+        // =====================================================
+        //
+        // isAdmin yalnız EKRANDA düymələri göstərib-gizlətmək
+        // üçündür (UI). Əsl qorunma Firebase Console-dakı
+        // Firestore Təhlükəsizlik Qaydalarında (Security Rules)
+        // olmalıdır — bax faylın sonundakı izahata.
+        // =====================================================
+
+        let isAdmin = false;
+
+
+        onAuthStateChanged(
+            auth,
+            async (user) => {
+
+                if (!user) {
+
+                    isAdmin = false;
+
+                    updateAdminUI();
+
+                    return;
+
+                }
+
+
+                try {
+
+                    const adminDocRef =
+                        doc(
+                            db,
+                            "admins",
+                            user.uid
+                        );
+
+
+                    const adminDocSnap =
+                        await getDoc(
+                            adminDocRef
+                        );
+
+
+                    if (adminDocSnap.exists()) {
+
+                        isAdmin = true;
+
+                        showToast(
+                            "✅ Admin olaraq daxil oldunuz."
+                        );
+
+                    } else {
+
+                        isAdmin = false;
+
+                        await signOut(auth);
+
+                        showToast(
+                            "❌ Bu hesabın admin icazəsi yoxdur."
+                        );
+
+                    }
+
+                } catch (error) {
+
+                    console.error(
+                        "Admin yoxlaması xətası:",
+                        error
+                    );
+
+                    isAdmin = false;
+
+                }
+
+
+                updateAdminUI();
+
+            }
+        );
 
 
         // =====================================================
@@ -1751,6 +2062,7 @@
                 filterProducts();
 
                 checkUrlCode();
+
             }
         );
 
@@ -2043,6 +2355,7 @@
                                     src="${product.img}"
                                     alt="${product.title}"
                                     onerror="
+                                        this.onerror=null;
                                         this.src =
                                         'https://images.unsplash.com/photo-1486006920555-c77dce18193b?auto=format&fit=crop&w=600&q=80'
                                     "
@@ -2287,6 +2600,7 @@ Qiymət: ${product.price} AZN`
                             object-fit: cover;
                         "
                         onerror="
+                            this.onerror=null;
                             this.src =
                             'https://images.unsplash.com/photo-1486006920555-c77dce18193b?auto=format&fit=crop&w=600&q=80'
                         "
@@ -2488,6 +2802,17 @@ Qiymət: ${item.price} AZN`
 
         function openAddModal() {
 
+            if (!isAdmin) {
+
+                showToast(
+                    "❌ Yalnız adminlər detal əlavə edə bilər."
+                );
+
+                return;
+
+            }
+
+
             document.getElementById(
                 "addModal"
             ).style.display = "flex";
@@ -2645,6 +2970,17 @@ Qiymət: ${item.price} AZN`
             event.preventDefault();
 
 
+            if (!isAdmin) {
+
+                showToast(
+                    "❌ Yalnız adminlər detal əlavə edə bilər."
+                );
+
+                return;
+
+            }
+
+
             const code =
                 document
                     .getElementById("newCode")
@@ -2683,6 +3019,19 @@ Qiymət: ${item.price} AZN`
                 );
 
 
+            const year =
+                document
+                    .getElementById("newYear")
+                    .value
+                    .trim();
+
+
+            const condition =
+                document
+                    .getElementById("newCondition")
+                    .value;
+
+
             const img =
                 document
                     .getElementById("newImg")
@@ -2698,13 +3047,8 @@ Qiymət: ${item.price} AZN`
                 title,
                 brand,
                 price,
-
-                condition:
-                    "İşlənmiş (Ölüxana)",
-
-                year:
-                    "2015-2023",
-
+                condition,
+                year,
                 img
             };
 
@@ -2757,8 +3101,135 @@ Qiymət: ${item.price} AZN`
 
 
                 showToast(
-                    "❌ Məlumat bazaya əlavə edilə bilmədi!"
+                    "❌ Məlumat bazaya əlavə edilə bilmədi! (Admin icazəni yoxlayın)"
                 );
+
+            }
+
+        }
+
+
+        // =====================================================
+        // ADMIN GİRİŞ / ÇIXIŞ
+        // =====================================================
+
+        function handleAdminAuthClick() {
+
+            if (isAdmin) {
+
+                signOut(auth);
+
+                showToast(
+                    "Admin hesabından çıxış edildi."
+                );
+
+                return;
+
+            }
+
+
+            document.getElementById(
+                "adminLoginModal"
+            ).style.display = "flex";
+
+        }
+
+
+        async function handleAdminLogin(event) {
+
+            event.preventDefault();
+
+
+            const email =
+                document
+                    .getElementById("adminEmail")
+                    .value
+                    .trim();
+
+
+            const password =
+                document
+                    .getElementById("adminPassword")
+                    .value;
+
+
+            const errorBox =
+                document.getElementById(
+                    "adminLoginError"
+                );
+
+
+            errorBox.style.display =
+                "none";
+
+
+            try {
+
+                await signInWithEmailAndPassword(
+                    auth,
+                    email,
+                    password
+                );
+
+
+                closeModal(
+                    "adminLoginModal"
+                );
+
+
+                document
+                    .querySelector(
+                        "#adminLoginModal form"
+                    )
+                    ?.reset();
+
+            } catch (error) {
+
+                console.error(
+                    "Admin girişi xətası:",
+                    error
+                );
+
+
+                errorBox.innerText =
+                    "❌ E-poçt və ya şifrə yanlışdır.";
+
+                errorBox.style.display =
+                    "block";
+
+            }
+
+        }
+
+
+        function updateAdminUI() {
+
+            const addPartBtn =
+                document.getElementById(
+                    "addPartBtn"
+                );
+
+
+            const adminAuthBtn =
+                document.getElementById(
+                    "adminAuthBtn"
+                );
+
+
+            if (addPartBtn) {
+
+                addPartBtn.style.display =
+                    isAdmin ? "" : "none";
+
+            }
+
+
+            if (adminAuthBtn) {
+
+                adminAuthBtn.innerText =
+                    isAdmin
+                        ? "🔓 Admin Çıxışı"
+                        : "🔐 Admin Girişi";
 
             }
 
@@ -2843,6 +3314,12 @@ Qiymət: ${item.price} AZN`
 
         window.handleAddProduct =
             handleAddProduct;
+
+        window.handleAdminAuthClick =
+            handleAdminAuthClick;
+
+        window.handleAdminLogin =
+            handleAdminLogin;
 
         window.showToast =
             showToast;
